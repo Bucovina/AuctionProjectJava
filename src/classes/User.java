@@ -8,6 +8,7 @@ abstract class User {
     private String name;
     private String password;
     private String username;
+    private int Role;
     private List<Item> ownedItems = new ArrayList<Item>();
 
     public String getPassword() {
@@ -26,11 +27,11 @@ abstract class User {
         this.username = username;
     }
 
-    public User(String name, String password, String username) {
+    public User(String name, String password, String username, int role) {
         this.name = name;
         this.password = password;
         this.username = username;
-
+        this.Role = role;
     }
 
     public List<Item> getOwnedItems() {
