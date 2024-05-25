@@ -1,4 +1,4 @@
-package classes.menus;
+package menus;
 
 public interface IMenu {
 

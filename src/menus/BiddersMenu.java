@@ -1,4 +1,4 @@
-package classes.menus;
+package menus;
 
 public class BiddersMenu extends Menu {
 

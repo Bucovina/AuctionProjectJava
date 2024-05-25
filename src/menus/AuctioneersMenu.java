@@ -1,4 +1,4 @@
-package classes.menus;
+package menus;
 
 public class AuctioneersMenu extends Menu{
 
@@ -22,10 +22,14 @@ public class AuctioneersMenu extends Menu{
             System.out.println("0. Exit");
         }
 
+        public void auctioneerAdd(){
+
+        }
+
         public void handleOption(int option) {
             switch (option) {
                 case 1:
-                    //auctioneerAdd();
+                    auctioneerAdd();
                     break;
                 case 2:
                     //auctioneerList();
