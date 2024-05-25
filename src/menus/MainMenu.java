@@ -30,18 +30,22 @@ public class MainMenu implements IMenu {
         System.out.println("0. Exit");
     }
 
+    public void handleSubmenu(Menu menu) {
+        menu.printMenu();
+        inside = false;
+        Menu.inside = true;
+        while (Menu.inside) {
+            Scanner scanner = new Scanner(System.in);
+            menu.handleMenu(scanner.nextInt());
+        }
+    }
+
     public void handleMenu(int option){
         switch(option){
             case 1:
 //                printAuctionsMenu();
                 AuctionMenu auctionMenu = AuctionMenu.getInstance();
-                auctionMenu.printMenu();
-                inside = false;
-                AuctionMenu.inside = true;
-                while(AuctionMenu.inside){
-                    Scanner scanner = new Scanner(System.in);
-                    auctionMenu.handleMenu(scanner.nextInt());
-                }
+                handleSubmenu(auctionMenu);
                 break;
             case 2:
 //                printBiddersMenu();
