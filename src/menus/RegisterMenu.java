@@ -45,12 +45,12 @@ public class RegisterMenu implements IMenu{
 
        if(role == 1) {
             RolesEnum userRole = RolesEnum.Auctioneer;
-            Auctioneer auctioneer = new Auctioneer(name, password, username, userRole.getValue());
+            Auctioneer auctioneer = new Auctioneer(name, password, username);
             userService.addUser(auctioneer);
        }
        else if(role == 2) {
            RolesEnum userRole = RolesEnum.Bidder;
-           Bidder bidder = new Bidder(name, password, username, role);
+           Bidder bidder = new Bidder(name, password, username);
            userService.addUser(bidder);
        }
         //TODO else {}

@@ -8,7 +8,7 @@ import java.util.List;
     private String name;
     private String password;
     private String username;
-    private int Role;
+    private int role;
     private List<Item> ownedItems = new ArrayList<Item>();
 
     public String getPassword() {
@@ -31,10 +31,14 @@ import java.util.List;
         this.name = name;
         this.password = password;
         this.username = username;
-        this.Role = role;
+        this.role = role;
     }
 
-    public List<Item> getOwnedItems() {
+      public int getRole() {
+          return role;
+      }
+
+      public List<Item> getOwnedItems() {
         return ownedItems;
     }
 
