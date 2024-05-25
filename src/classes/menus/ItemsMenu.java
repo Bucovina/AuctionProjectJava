@@ -29,10 +29,6 @@ public class ItemsMenu extends Menu{
             case 2:
                 //itemList();
                 break;
-            case 3:
-                inside = false;
-                MainMenu.inside = true;
-                break;
             default:
                 System.out.println("Invalid option");
         }

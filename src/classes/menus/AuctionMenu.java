@@ -34,10 +34,6 @@ public class AuctionMenu extends Menu{
             case 3:
                 //auctionStart();
                 break;
-            case 4:
-                inside = false;
-                MainMenu.inside = true;
-                break;
             default:
                 System.out.println("Invalid option");
         }

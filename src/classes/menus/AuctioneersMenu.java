@@ -30,10 +30,6 @@ public class AuctioneersMenu extends Menu{
                 case 2:
                     //auctioneerList();
                     break;
-                case 3:
-                    inside = false;
-                    MainMenu.inside = true;
-                    break;
                 default:
                     System.out.println("Invalid option");
             }

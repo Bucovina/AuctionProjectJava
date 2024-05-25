@@ -12,5 +12,6 @@ public class Main {
             mainMenu.printMenu();
             int option = scanner.nextInt();
             mainMenu.handleMenu(option);
+        }
     }
 }

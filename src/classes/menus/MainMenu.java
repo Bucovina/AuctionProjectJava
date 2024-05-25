@@ -27,61 +27,48 @@ public class MainMenu implements IMenu {
         System.out.println("2. Bidders");
         System.out.println("3. Items");
         System.out.println("4. Auctioneers");
+        System.out.println("5. Bids");
         System.out.println("0. Exit");
+    }
+
+    public void handleSubmenu(Menu menu){
+        menu.printMenu();
+        inside = false;
+        Menu.inside = true;
+        while(Menu.inside){
+            Scanner scanner = new Scanner(System.in);
+            menu.handleMenu(scanner.nextInt());
+        }
     }
 
     public void handleMenu(int option){
         switch(option){
             case 1:
-//                printAuctionsMenu();
                 AuctionMenu auctionMenu = AuctionMenu.getInstance();
-                auctionMenu.printMenu();
-                inside = false;
-                AuctionMenu.inside = true;
-                while(AuctionMenu.inside){
-                    Scanner scanner = new Scanner(System.in);
-                    auctionMenu.handleMenu(scanner.nextInt());
-                }
+                handleSubmenu(auctionMenu);
                 break;
             case 2:
-//                printBiddersMenu();
                 BiddersMenu biddersMenu = BiddersMenu.getInstance();
-                biddersMenu.printMenu();
-                inside = false;
-                BiddersMenu.inside = true;
-                while(BiddersMenu.inside){
-                    Scanner scanner = new Scanner(System.in);
-                    biddersMenu.handleMenu(scanner.nextInt());
-                }
+                handleSubmenu(biddersMenu);
                 break;
             case 3:
-//                printItemsMenu();
                 ItemsMenu itemsMenu = ItemsMenu.getInstance();
-                itemsMenu.printMenu();
-                inside = false;
-                ItemsMenu.inside = true;
-                while(ItemsMenu.inside){
-                    Scanner scanner = new Scanner(System.in);
-                    itemsMenu.handleMenu(scanner.nextInt());
-                }
+                handleSubmenu(itemsMenu);
                 break;
             case 4:
-//                printAuctioneersMenu();
                 AuctioneersMenu auctioneersMenu = AuctioneersMenu.getInstance();
-                auctioneersMenu.printMenu();
-                inside = false;
-                AuctioneersMenu.inside = true;
-                while(AuctioneersMenu.inside){
-                    Scanner scanner = new Scanner(System.in);
-                    auctioneersMenu.handleMenu(scanner.nextInt());
-                }
+                handleSubmenu(auctioneersMenu);
+                break;
+            case 5:
+                BidsMenu bidsMenu = BidsMenu.getInstance();
+                handleSubmenu(bidsMenu);
                 break;
             case 0:
                 System.exit(0);
                 break;
             default:
                 System.out.println("Invalid option");
+
         }
     }
-
 }
