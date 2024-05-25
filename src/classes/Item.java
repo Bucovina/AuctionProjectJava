@@ -14,6 +14,12 @@ public class Item {
         this.description = description;
     }
 
+    public Item(int Id,String name, String description) {
+        this.Id = Id;
+        this.name = name;
+        this.description = description;
+    }
+
     public String getName() {
         return name;
     }
@@ -28,5 +34,10 @@ public class Item {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + description;
     }
 }
