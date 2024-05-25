@@ -14,9 +14,4 @@ public class Auctioneer extends User {
         super(Id,name, password, username, RolesEnum.Auctioneer.getValue());
     }
 
-    public void createAuction(String title, String description, Item item, int startPrice){
-        if(!this.getOwnedItems().contains(item))
-            throw new InvalidParameterException("You can't auction an item that you don't own!");
-        Auction newAuction = new Auction(title,description,item.getId(),this.getId(),startPrice);
-    }
 }

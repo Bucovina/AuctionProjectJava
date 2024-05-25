@@ -32,18 +32,35 @@ public class ItemService {
             preparedStatement.setInt(1, Menu.getCurrentUser().getId());
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 int id = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
                 String description = resultSet.getString("Description");
-                items.add(new Item(id,name,description));
+                items.add(new Item(id, name, description));
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return items;
     }
 
+
+    public Item getItemById(int id) {
+
+        try (Connection connection = DriverManager.getConnection(Database.getURL(), Database.getUSER(), Database.getPASSWORD());
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Items WHERE id = ?")) {
+
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String name = resultSet.getString("Name");
+                String description = resultSet.getString("Description");
+                return new Item(id, name, description);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 }

@@ -10,6 +10,20 @@ public class Bid {
         this.bidderId = bidderId;
     }
 
+    public Bid(int Id, int price, int bidderId) {
+        this.Id = Id;
+        this.price = price;
+        this.bidderId = bidderId;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
     public int getPrice() {
         return price;
     }

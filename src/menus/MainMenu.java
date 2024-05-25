@@ -7,26 +7,26 @@ public class MainMenu implements IMenu {
 
     public static boolean inside = false;
 
-    String s = Menu.getCurrentUser().getName();
+    String name = Menu.getCurrentUser().getName();
+    int roleid = Menu.getCurrentUser().getRole();
 
-    private MainMenu (){
+    private MainMenu() {
 
     }
 
-    public static synchronized MainMenu getInstance(){
-        if(menu == null){
+    public static synchronized MainMenu getInstance() {
+        if (menu == null) {
             menu = new MainMenu();
         }
         return menu;
     }
 
-    public void printMenu(){
-        System.out.println("----------------- Main Menu -----------------");
-        System.out.println("Hello, " + s);
+    public void printMenu() {
+        System.out.println("\n----------------- Main Menu -----------------");
+        String role = roleid == 1 ? "Auctioneer" : "Bidder";
+        System.out.println("Hello, " + role + " " + name);
         System.out.println("1. Auctions");
-        System.out.println("2. Bidders");
-        System.out.println("3. Items");
-        System.out.println("4. Auctioneers");
+        System.out.println("2. Items");
         System.out.println("0. Exit");
     }
 
@@ -40,44 +40,22 @@ public class MainMenu implements IMenu {
         }
     }
 
-    public void handleMenu(int option){
-        switch(option){
+    public void handleMenu(int option) {
+        switch (option) {
             case 1:
 //                printAuctionsMenu();
                 AuctionMenu auctionMenu = AuctionMenu.getInstance();
                 handleSubmenu(auctionMenu);
                 break;
             case 2:
-//                printBiddersMenu();
-                BiddersMenu biddersMenu = BiddersMenu.getInstance();
-                biddersMenu.printMenu();
-                inside = false;
-                BiddersMenu.inside = true;
-                while(BiddersMenu.inside){
-                    Scanner scanner = new Scanner(System.in);
-                    biddersMenu.handleMenu(scanner.nextInt());
-                }
-                break;
-            case 3:
 //                printItemsMenu();
                 ItemsMenu itemsMenu = ItemsMenu.getInstance();
                 itemsMenu.printMenu();
                 inside = false;
                 ItemsMenu.inside = true;
-                while(ItemsMenu.inside){
+                while (ItemsMenu.inside) {
                     Scanner scanner = new Scanner(System.in);
                     itemsMenu.handleMenu(scanner.nextInt());
-                }
-                break;
-            case 4:
-//                printAuctioneersMenu();
-                AuctioneersMenu auctioneersMenu = AuctioneersMenu.getInstance();
-                auctioneersMenu.printMenu();
-                inside = false;
-                AuctioneersMenu.inside = true;
-                while(AuctioneersMenu.inside){
-                    Scanner scanner = new Scanner(System.in);
-                    auctioneersMenu.handleMenu(scanner.nextInt());
                 }
                 break;
             case 0:

@@ -44,17 +44,15 @@ public class RegisterMenu implements IMenu{
             RolesEnum userRole = RolesEnum.Auctioneer;
             Auctioneer auctioneer = new Auctioneer(name, password, username);
             userService.addUser(auctioneer);
+            Menu.setCurrentUser(auctioneer);
        }
        else if(role == 2) {
            RolesEnum userRole = RolesEnum.Bidder;
            Bidder bidder = new Bidder(name, password, username);
            userService.addUser(bidder);
+           Menu.setCurrentUser(bidder);
        }
-        //TODO else {}
-
-        System.out.print("Press any key to submit and save");
-
-        //TODO saveUser()
+        inside = false;
     }
 
     @Override

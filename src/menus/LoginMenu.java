@@ -2,7 +2,7 @@ package menus;
 
 import services.GenericService;
 import services.UserService;
-
+import classes.User;
 import java.util.Scanner;
 
 
@@ -23,6 +23,17 @@ public class LoginMenu implements IMenu{
         return loginMenu;
     }
 
+    public void logIn(String username, String  password){
+        User user = userService.Auth(username,password);
+        if(user == null){
+            printMenu();
+        }
+        else {
+            Menu.setCurrentUser(user);
+        }
+
+    }
+
     @Override
     public void printMenu() {
         System.out.println("----------------- Login Menu -----------------");
@@ -31,7 +42,7 @@ public class LoginMenu implements IMenu{
         String username = in.nextLine();
         System.out.print("Enter password: ");
         String password = in.nextLine();
-        Menu.setCurrentUser(userService.Auth(username,password));
+        logIn(username, password);
     }
 
     @Override
