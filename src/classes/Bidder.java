@@ -9,6 +9,10 @@ public class Bidder extends User {
         super(name, password, username, RolesEnum.Bidder.getValue());
     }
 
+    public Bidder(int Id, String name, String password, String username) {
+        super(Id, name, password, username, RolesEnum.Bidder.getValue());
+    }
+
     public void createNewBid(Auction auction, int price) {
         Bid newBid = new Bid(price, this.getId());
         try {

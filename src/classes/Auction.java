@@ -1,13 +1,10 @@
 package classes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Auction {
     private int Id;
-    private String Title;
-    private String Description;
+    private String title;
+    private String description;
     private int itemId;
     private int auctioneerId;
     private int startPrice;
@@ -30,19 +27,19 @@ public class Auction {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public int getItemId() {
@@ -54,8 +51,8 @@ public class Auction {
     }
 
     public Auction(String title, String description, int itemId, int auctioneerId, int startPrice) {
-        this.Title = title;
-        this.Description = description;
+        this.title = title;
+        this.description = description;
         this.startPrice = startPrice;
         this.itemId = itemId;
         this.auctioneerId = auctioneerId;

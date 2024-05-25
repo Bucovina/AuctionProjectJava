@@ -32,7 +32,7 @@ public class UserService {
         }
     }
 
-    public List<User> getAngajati() {
+    public List<User> getUsers() {
         List<User> users = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(Database.getURL(), Database.getUSER(), Database.getPASSWORD());
@@ -43,7 +43,7 @@ public class UserService {
                 String name = resultSet.getString("Name");
                 String username = resultSet.getString("Username");
                 String password = resultSet.getString("Password");
-                int role = resultSet.getInt("Role");
+                int role = resultSet.getInt("RoleId");
                 User user;
                 if (role == RolesEnum.Auctioneer.getValue())
                     user = new Auctioneer(name, username, password);
@@ -68,12 +68,13 @@ public class UserService {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
+                int id=resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
                 int role = resultSet.getInt("RoleId");
                 if(role==RolesEnum.Auctioneer.getValue())
-                    return new Auctioneer(name, username, password);
+                    return new Auctioneer(id,name, username, password);
                 else
-                    return new Bidder(name, username, password);
+                    return new Bidder(id,name, username, password);
             }
 
         } catch (SQLException e) {

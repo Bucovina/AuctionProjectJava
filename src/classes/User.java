@@ -27,18 +27,26 @@ abstract public class User {
         this.username = username;
     }
 
-    public User(String name, String password, String username,int role) {
+    public User(String name, String password, String username, int role) {
         this.name = name;
         this.password = password;
         this.username = username;
         this.role = role;
     }
 
-      public int getRole() {
-          return role;
-      }
+    public User(int Id, String name, String password, String username, int role) {
+        this.Id = Id;
+        this.name = name;
+        this.password = password;
+        this.username = username;
+        this.role = role;
+    }
 
-      public List<Item> getOwnedItems() {
+    public int getRole() {
+        return role;
+    }
+
+    public List<Item> getOwnedItems() {
         return ownedItems;
     }
 
