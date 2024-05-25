@@ -1,7 +1,4 @@
-
-import classes.User;
 import menus.LoginRegister;
-import menus.MainMenu;
 import services.GenericService;
 import services.UserService;
 
