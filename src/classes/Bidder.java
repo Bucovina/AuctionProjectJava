@@ -1,11 +1,12 @@
 package classes;
 
 import Exceptions.InvalidPrice;
+import enums.RolesEnum;
 
 public class Bidder extends User {
 
-    public Bidder(String name, String password, String username, int role) {
-        super(name, password, username, role);
+    public Bidder(String name, String password, String username) {
+        super(name, password, username, RolesEnum.Bidder.getValue());
     }
 
     public void createNewBid(Auction auction, int price) {
