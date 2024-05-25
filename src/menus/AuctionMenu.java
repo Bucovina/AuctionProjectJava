@@ -1,4 +1,6 @@
-package classes.menus;
+package menus;
+
+import java.util.Scanner;
 
 public class AuctionMenu extends Menu{
 
@@ -15,6 +17,20 @@ public class AuctionMenu extends Menu{
         return menu;
     }
 
+    public void addAuction(){
+        System.out.println("----------------- Add Auction Menu -----------------");
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter auction title: ");
+        String title = in.nextLine();
+        System.out.print("Enter auction description: ");
+        String description = in.nextLine();
+        System.out.print("Enter auction start price: ");
+        int startPrice = Integer.parseInt(in.nextLine());
+        System.out.print("Your items are : ");
+
+
+    }
+
     public void printMenu() {
         System.out.println("----------------- Auctions Menu -----------------");
         System.out.println("1. Add auction");
@@ -26,7 +42,7 @@ public class AuctionMenu extends Menu{
     public void handleOption(int option) {
         switch (option) {
             case 1:
-                //auctionAdd();
+                addAuction();
                 break;
             case 2:
                 //auctionList();

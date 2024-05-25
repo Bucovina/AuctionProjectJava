@@ -1,4 +1,4 @@
-package classes.menus;
+package menus;
 
 public class ItemsMenu extends Menu{
     private static ItemsMenu menu = null;

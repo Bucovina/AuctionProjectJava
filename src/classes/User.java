@@ -1,5 +1,6 @@
 package classes;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,8 +9,33 @@ abstract class User {
     static private int nrInstances = 0;
     private int Id;
     private String name;
-    private Date birthDate;
+    private String password;
+    private String username;
     private List<Item> ownedItems = new ArrayList<Item>();
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public User(String name, String password, String username) {
+        Id = ++nrInstances;
+        this.name = name;
+        this.password = password;
+        this.username = username;
+
+    }
 
     public List<Item> getOwnedItems() {
         return ownedItems;
@@ -17,12 +43,6 @@ abstract class User {
 
     public void setOwnedItems(List<Item> ownedItems) {
         this.ownedItems = ownedItems;
-    }
-
-    public User(String name, Date birthDate) {
-        Id = ++nrInstances;
-        this.name = name;
-        this.birthDate = birthDate;
     }
 
     public int getId() {
@@ -37,11 +57,4 @@ abstract class User {
         this.name = name;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-}
+   }
