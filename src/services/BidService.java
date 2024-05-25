@@ -1,14 +1,10 @@
 package services;
 
-import classes.Bid;
-import classes.Database;
-import classes.User;
+import classes.*;
+import enums.RolesEnum;
 import menus.Menu;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class BidService {
     public void addBid(Bid bid) {
@@ -25,5 +21,23 @@ public class BidService {
         }
     }
 
-    //public bool validatePrice()
+    public Bid getBid(int id) {
+        try (Connection connection = DriverManager.getConnection(Database.getURL(), Database.getUSER(), Database.getPASSWORD());
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM bids WHERE Id = ?")) {
+
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int price = resultSet.getInt("Price");
+                int bidderId = resultSet.getInt("BidderID");
+                return new Bid(id,price, bidderId);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

@@ -5,6 +5,7 @@ import services.GenericService;
 import services.ItemService;
 import services.UserService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ItemsMenu extends Menu{
@@ -38,6 +39,25 @@ public class ItemsMenu extends Menu{
         System.out.println("Item description : ");
         String description = in.nextLine();
         itemService.addItem(new Item(name, description));
+        printMenu();
+    }
+
+    public void listItems(){
+        List<Item> items = itemService.getUserItems();
+        System.out.println("\n----------------- Items List Menu -----------------");
+        for(Item item : items){
+            System.out.println(item.toString());
+        }
+
+        System.out.println("Press X to exit... ");
+        Scanner in = new Scanner(System.in);
+        String ch = in.nextLine();
+
+        while(!ch.equals("X")){
+            ch = in.nextLine();
+            System.out.println("Press X to exit... ");
+        }
+        printMenu();
     }
 
 
@@ -47,9 +67,9 @@ public class ItemsMenu extends Menu{
                 addItem();
                 break;
             case 2:
-                //itemList();
+                listItems();
                 break;
-            case 3:
+            case 0:
                 inside = false;
                 MainMenu.inside = true;
                 break;

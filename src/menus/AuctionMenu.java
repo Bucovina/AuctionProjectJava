@@ -1,10 +1,18 @@
 package menus;
 
 import classes.Auction;
+import classes.Auctioneer;
+import classes.Bid;
+import classes.Item;
+import enums.RolesEnum;
 import services.AuctionService;
+import services.BidService;
 import services.GenericService;
 import services.ItemService;
+import java.util.HashMap;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AuctionMenu extends Menu{
@@ -12,6 +20,8 @@ public class AuctionMenu extends Menu{
     private static AuctionMenu menu = null;
     ItemService itemService = GenericService.getInstance(ItemService.class);
     AuctionService auctionService = GenericService.getInstance(AuctionService.class);
+    BidService bidService = GenericService.getInstance(BidService.class);
+
     private AuctionMenu() {
 
     }
@@ -33,33 +43,81 @@ public class AuctionMenu extends Menu{
         System.out.print("Enter auction start price: ");
         int startPrice = Integer.parseInt(in.nextLine());
         System.out.print("Your items are : ");
-        //itemService.
+        List<Item> myItems= itemService.getUserItems();
+        int index=0;
+        Map<Integer,Item> itemCoversion = new HashMap<>();
+        for(Item item:myItems) {
+            index++;
+            itemCoversion.put(index,item);
+            System.out.println(index+". "+item.toString()+'\n');
+        }
         System.out.print("Choose the item id you would like to create an auction for : ");
         int itemId = Integer.parseInt(in.nextLine());
-        Auction auction = new Auction(title, description, itemId, Menu.getCurrentUser().getId(), startPrice);
+        Item realItem=itemCoversion.get(itemId);
+
+        Auction auction = new Auction(title, description,  realItem, (Auctioneer)Menu.getCurrentUser(), startPrice);
         auctionService.addAuction(auction);
         }
 
     public void printMenu() {
-        System.out.println("----------------- Auctions Menu -----------------");
-        System.out.println("1. Add auction");
+        System.out.println("\n----------------- Auctions Menu -----------------");
+        if(Menu.getCurrentUser().getRole() == RolesEnum.Auctioneer.getValue())
+            System.out.println("1. Add auction");
+        else
+            System.out.println("1. Participate in auction");
         System.out.println("2. List auctions");
-        System.out.println("3. Start an auction");
         System.out.println("0. Exit");
+    }
+
+    public void auctionList(){
+        System.out.println("\n--------------- Auctions List ----------------");
+        List<Auction> auctions = auctionService.getAuctions();
+        for(Auction auction:auctions) {
+            System.out.println(auction.toString());
+        }
+    }
+
+    public void addBid(){
+        System.out.println("\n----------------- Add Bid Menu -----------------");
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter bid price: ");
+        int price = Integer.parseInt(in.nextLine());
+
+        bidService.addBid(new Bid(price, Menu.getCurrentUser().getId()));
+
+    }
+
+    public void participateInAuction(){
+        System.out.print("\n--------Auction Participation--------------");
+        System.out.print("\nThe auctions are : ");
+        Scanner in = new Scanner(System.in);
+        List<Auction> auctions = auctionService.getAuctions();
+        int index=0;
+        Map<Integer,Auction> auctionCoversion = new HashMap<>();
+        for(Auction auction:auctions) {
+            index++;
+            auctionCoversion.put(index,auction);
+            System.out.println("\n" + index+". "+auction.toString());
+        }
+        System.out.print("\nChoose the item id you would like to participate in : ");
+        int auctionId = Integer.parseInt(in.nextLine());
+        Auction realauction=auctionCoversion.get(auctionId);
+        //addBid();
+        auctionService.startTimingAuction(realauction);
     }
 
     public void handleOption(int option) {
         switch (option) {
             case 1:
-                addAuction();
+                if(Menu.getCurrentUser().getRole() == RolesEnum.Auctioneer.getValue())
+                    addAuction();
+                else
+                    participateInAuction();
                 break;
             case 2:
-                //auctionList();
+                auctionList();
                 break;
-            case 3:
-                //auctionStart();
-                break;
-            case 4:
+            case 0:
                 inside = false;
                 MainMenu.inside = true;
                 break;
