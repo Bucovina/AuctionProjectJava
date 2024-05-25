@@ -1,7 +1,8 @@
 package classes;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Auction {
     static private int nrInstances = 0;
@@ -12,14 +13,21 @@ public class Auction {
     private int auctioneerId;
     private int startPrice;
     private Bid highestBid = null;
-    private Map<Integer, Integer> topPrices = new HashMap<>();
 
-    public Map<Integer, Integer> getTopPrices() {
-        return topPrices;
+    public int getStartPrice() {
+        return startPrice;
     }
 
-    public void setTopPrices(Map<Integer, Integer> topPrices) {
-        this.topPrices = topPrices;
+    public void setStartPrice(int startPrice) {
+        this.startPrice = startPrice;
+    }
+
+    public Bid getHighestBid() {
+        return highestBid;
+    }
+
+    public void setHighestBid(Bid highestBid) {
+        this.highestBid = highestBid;
     }
 
     public String getTitle() {
@@ -61,13 +69,5 @@ public class Auction {
 
     public void setAuctioneerId(int auctioneerId) {
         this.auctioneerId = auctioneerId;
-    }
-
-    public Bid getHighestBid() {
-        return highestBid;
-    }
-
-    public void setHighestBid(Bid highestBid) {
-        this.highestBid = highestBid;
     }
 }

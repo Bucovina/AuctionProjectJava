@@ -1,3 +1,4 @@
+
 import classes.menus.MainMenu;
 
 import java.util.Scanner;
@@ -11,6 +12,5 @@ public class Main {
             mainMenu.printMenu();
             int option = scanner.nextInt();
             mainMenu.handleMenu(option);
-        }
     }
 }

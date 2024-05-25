@@ -6,7 +6,6 @@ public class Item {
     private String name;
     private String description;
 
-
     public int getId() {
         return Id;
     }
