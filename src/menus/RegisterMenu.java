@@ -2,9 +2,13 @@ package menus;
 
 import classes.Auctioneer;
 import classes.Bidder;
+import classes.Database;
+import classes.User;
+import enums.RolesEnum;
+import services.GenericService;
+import services.UserService;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import javax.management.relation.Role;
 import java.util.Scanner;
 
 public class RegisterMenu implements IMenu{
@@ -12,6 +16,10 @@ public class RegisterMenu implements IMenu{
     private static RegisterMenu registerMenu = null;
 
     public static boolean inside = false;
+
+    UserService userService = GenericService.getInstance(UserService.class);
+
+    private Database db = Database.getInstance();
 
     private RegisterMenu() {}
 
@@ -36,10 +44,14 @@ public class RegisterMenu implements IMenu{
         int role = Integer.parseInt(in.nextLine());
 
        if(role == 1) {
-            Auctioneer auctioneer = new Auctioneer(name, password, username);
+            RolesEnum userRole = RolesEnum.Auctioneer;
+            Auctioneer auctioneer = new Auctioneer(name, password, username, userRole.getValue());
+            userService.addUser(auctioneer);
        }
        else if(role == 2) {
-           Bidder bidder = new Bidder(name, password, username);
+           RolesEnum userRole = RolesEnum.Bidder;
+           Bidder bidder = new Bidder(name, password, username, role);
+           userService.addUser(bidder);
        }
         //TODO else {}
 

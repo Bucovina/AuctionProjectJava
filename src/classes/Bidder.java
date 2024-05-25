@@ -4,8 +4,8 @@ import Exceptions.InvalidPrice;
 
 public class Bidder extends User {
 
-    public Bidder(String name, String password, String username) {
-        super(name, password, username);
+    public Bidder(String name, String password, String username, int role) {
+        super(name, password, username, role);
     }
 
     public void createNewBid(Auction auction, int price) {
