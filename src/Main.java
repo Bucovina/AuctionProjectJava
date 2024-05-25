@@ -1,17 +1,19 @@
 
-import classes.menus.MainMenu;
+import menus.LoginRegister;
+import menus.MainMenu;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        MainMenu mainMenu = MainMenu.getInstance();
+
+        LoginRegister loginRegister = LoginRegister.getInstance();
         Scanner scanner = new Scanner(System.in);
-        MainMenu.inside = true;
-        while (MainMenu.inside) {
-            mainMenu.printMenu();
+        LoginRegister.inside = true;
+        while (LoginRegister.inside) {
+            loginRegister.printMenu();
             int option = scanner.nextInt();
-            mainMenu.handleMenu(option);
+            loginRegister.handleMenu(option);
         }
     }
 }

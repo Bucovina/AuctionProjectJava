@@ -1,4 +1,4 @@
-package classes.menus;
+package menus;
 
 public abstract class Menu implements IMenu {
     public static boolean inside = false;
