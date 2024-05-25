@@ -11,6 +11,8 @@ abstract public class User {
     private int role;
     private List<Item> ownedItems = new ArrayList<Item>();
 
+
+
     public String getPassword() {
         return password;
     }
@@ -54,7 +56,7 @@ abstract public class User {
         this.ownedItems = ownedItems;
     }
 
-    public int getId() {
+    public final int getId() {
         return Id;
     }
 
@@ -66,6 +68,7 @@ abstract public class User {
         this.name = name;
     }
 
+    @Override
     public String toString() {
         StringBuilder print = new StringBuilder("Users: " + "Name: " + name + " Username: " + username + " Role: " + role + " Owned items: ");
         for (Item item : ownedItems) {

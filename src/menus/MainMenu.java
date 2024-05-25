@@ -7,7 +7,7 @@ public class MainMenu implements IMenu {
 
     public static boolean inside = false;
 
-    String s = "Gogu";
+    String s = Menu.getCurrentUser().getName();
 
     private MainMenu (){
 
