@@ -2,9 +2,9 @@ package menus;
 
 import classes.Auctioneer;
 import classes.Bidder;
+import classes.Database;
+import enums.RolesEnum;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class RegisterMenu implements IMenu{
@@ -36,7 +36,9 @@ public class RegisterMenu implements IMenu{
         int role = Integer.parseInt(in.nextLine());
 
        if(role == 1) {
-            Auctioneer auctioneer = new Auctioneer(name, password, username);
+            Auctioneer auctioneer = new Auctioneer(name, password, username, 1);
+            Database db = Database.getInstance();
+            db.addUser(auctioneer);
        }
        else if(role == 2) {
            Bidder bidder = new Bidder(name, password, username);
