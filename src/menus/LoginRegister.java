@@ -45,7 +45,13 @@ public class LoginRegister implements IMenu{
                 loginMenu.printMenu();
                 inside = false;
                 LoginMenu.inside = true;
-                printMainMenu();
+                if(Menu.getCurrentUser()!=null)
+                    printMainMenu();
+                else {
+                    System.out.println("Wrong data!");
+                    loginMenu.printMenu();
+                    LoginMenu.inside = true;
+                }
                 break;
 
             case 2:
