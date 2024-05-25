@@ -3,6 +3,7 @@ package services;
 import classes.Bid;
 import classes.Database;
 import classes.User;
+import menus.Menu;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,9 +16,7 @@ public class BidService {
              PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Bids (price, bidderId) VALUES (?, ?)")) {
 
             preparedStatement.setInt(1, bid.getPrice());
-//            preparedStatement.setString(2, );
-//            preparedStatement.setString(3, user.getPassword());
-//            preparedStatement.setInt(4, user.getRole());
+            preparedStatement.setInt(2, Menu.getCurrentUser().getId());
 
             preparedStatement.executeUpdate();
 
@@ -25,4 +24,6 @@ public class BidService {
             e.printStackTrace();
         }
     }
+
+    //public bool validatePrice()
 }

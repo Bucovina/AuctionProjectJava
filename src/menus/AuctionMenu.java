@@ -1,11 +1,17 @@
 package menus;
 
+import classes.Auction;
+import services.AuctionService;
+import services.GenericService;
+import services.ItemService;
+
 import java.util.Scanner;
 
 public class AuctionMenu extends Menu{
 
     private static AuctionMenu menu = null;
-
+    ItemService itemService = GenericService.getInstance(ItemService.class);
+    AuctionService auctionService = GenericService.getInstance(AuctionService.class);
     private AuctionMenu() {
 
     }
@@ -27,9 +33,12 @@ public class AuctionMenu extends Menu{
         System.out.print("Enter auction start price: ");
         int startPrice = Integer.parseInt(in.nextLine());
         System.out.print("Your items are : ");
-
-
-    }
+        //itemService.
+        System.out.print("Choose the item id you would like to create an auction for : ");
+        int itemId = Integer.parseInt(in.nextLine());
+        Auction auction = new Auction(title, description, itemId, Menu.getCurrentUser().getId(), startPrice);
+        auctionService.addAuction(auction);
+        }
 
     public void printMenu() {
         System.out.println("----------------- Auctions Menu -----------------");
