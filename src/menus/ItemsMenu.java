@@ -1,5 +1,9 @@
 package menus;
 
+import classes.Item;
+
+import java.util.Scanner;
+
 public class ItemsMenu extends Menu{
     private static ItemsMenu menu = null;
 
@@ -20,6 +24,17 @@ public class ItemsMenu extends Menu{
         System.out.println("2. List items");
         System.out.println("0. Exit");
     }
+
+    public void addItem(){
+        System.out.println("----------------- Add Item Menu -----------------");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Item name : ");
+        String name = in.nextLine();
+        System.out.println("Item description : ");
+        String description = in.nextLine();
+
+    }
+
 
     public void handleOption(int option) {
         switch (option) {
