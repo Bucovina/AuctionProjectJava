@@ -17,7 +17,7 @@ public class AuctionService {
             preparedStatement.setString(1, auction.getTitle());
             preparedStatement.setString(2, auction.getDescription());
             preparedStatement.setInt(3, auction.getItemId());
-            preparedStatement.setInt(4, Menu.getCurrentUser().getId());
+            preparedStatement.setInt(4, auction.getAuctioneerId());
             preparedStatement.setInt(5, auction.getStartPrice());
 
             preparedStatement.executeUpdate();
