@@ -1,7 +1,6 @@
 package classes;
 
 public class Item {
-    private static int nrInstances = 0;
     private int Id;
     private String name;
     private String description;
@@ -11,7 +10,6 @@ public class Item {
     }
 
     public Item(String name, String description) {
-        this.Id = ++nrInstances;
         this.name = name;
         this.description = description;
     }

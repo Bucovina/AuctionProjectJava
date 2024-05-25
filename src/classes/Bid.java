@@ -1,13 +1,11 @@
 package classes;
 
 public class Bid {
-    static private int nrInstances = 0;
     private int Id;
     private int price;
     private int bidderId;
 
     public Bid(int price, int bidderId) {
-        this.Id = ++nrInstances;
         this.price = price;
         this.bidderId = bidderId;
     }

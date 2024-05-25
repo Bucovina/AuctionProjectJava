@@ -1,7 +1,6 @@
 package classes;
 
 import java.security.InvalidParameterException;
-import java.time.LocalDate;
 
 public class Auctioneer extends User {
 
