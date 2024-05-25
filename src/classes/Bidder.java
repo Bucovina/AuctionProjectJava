@@ -2,9 +2,6 @@ package classes;
 
 import Exceptions.InvalidPrice;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 public class Bidder extends User {
 
     public Bidder(String name, String password, String username) {

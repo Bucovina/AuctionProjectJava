@@ -5,7 +5,6 @@ import java.util.List;
 
 
 public class Auction {
-    static private int nrInstances = 0;
     private int Id;
     private String Title;
     private String Description;
@@ -55,7 +54,6 @@ public class Auction {
     }
 
     public Auction(String title, String description, int itemId, int auctioneerId, int startPrice) {
-        this.Id = ++nrInstances;
         this.Title = title;
         this.Description = description;
         this.startPrice = startPrice;

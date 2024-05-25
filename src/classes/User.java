@@ -1,12 +1,9 @@
 package classes;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 abstract class User {
-    static private int nrInstances = 0;
     private int Id;
     private String name;
     private String password;
@@ -30,7 +27,6 @@ abstract class User {
     }
 
     public User(String name, String password, String username) {
-        Id = ++nrInstances;
         this.name = name;
         this.password = password;
         this.username = username;
