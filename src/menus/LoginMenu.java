@@ -1,12 +1,18 @@
 package menus;
 
+import services.GenericService;
+import services.UserService;
+
 import java.util.Scanner;
+
 
 public class LoginMenu implements IMenu{
 
     private static LoginMenu loginMenu = null;
 
     public static boolean inside = false;
+
+    UserService userService = GenericService.getInstance(UserService.class);
 
     private LoginMenu() {}
 
@@ -25,7 +31,7 @@ public class LoginMenu implements IMenu{
         String username = in.nextLine();
         System.out.print("Enter password: ");
         String password = in.nextLine();
-
+        Menu.setCurrentUser(userService.Auth(username,password));
     }
 
     @Override

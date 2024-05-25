@@ -3,12 +3,9 @@ package menus;
 import classes.Auctioneer;
 import classes.Bidder;
 import classes.Database;
-import classes.User;
 import enums.RolesEnum;
 import services.GenericService;
 import services.UserService;
-
-import javax.management.relation.Role;
 import java.util.Scanner;
 
 public class RegisterMenu implements IMenu{

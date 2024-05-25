@@ -3,7 +3,7 @@ package classes;
 import java.util.ArrayList;
 import java.util.List;
 
-  abstract public class User {
+abstract public class User {
     private int Id;
     private String name;
     private String password;
@@ -27,7 +27,7 @@ import java.util.List;
         this.username = username;
     }
 
-    public User(String name, String password, String username, int role) {
+    public User(String name, String password, String username,int role) {
         this.name = name;
         this.password = password;
         this.username = username;
@@ -58,4 +58,11 @@ import java.util.List;
         this.name = name;
     }
 
-   }
+    public String toString() {
+        StringBuilder print = new StringBuilder("Users: " + "Name: " + name + " Username: " + username + " Role: " + role + " Owned items: ");
+        for (Item item : ownedItems) {
+            print.append(" ").append(item.toString());
+        }
+        return print.toString();
+    }
+}
