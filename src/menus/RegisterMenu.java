@@ -2,8 +2,6 @@ package menus;
 
 import classes.Auctioneer;
 import classes.Bidder;
-import classes.Database;
-import enums.RolesEnum;
 import services.GenericService;
 import services.UserService;
 import java.util.Scanner;
@@ -15,8 +13,6 @@ public class RegisterMenu implements IMenu{
     public static boolean inside = false;
 
     UserService userService = GenericService.getInstance(UserService.class);
-
-    private Database db = Database.getInstance();
 
     private RegisterMenu() {}
 
@@ -41,13 +37,11 @@ public class RegisterMenu implements IMenu{
         int role = Integer.parseInt(in.nextLine());
 
        if(role == 1) {
-            RolesEnum userRole = RolesEnum.Auctioneer;
             Auctioneer auctioneer = new Auctioneer(name, password, username);
             userService.addUser(auctioneer);
             Menu.setCurrentUser(auctioneer);
        }
        else if(role == 2) {
-           RolesEnum userRole = RolesEnum.Bidder;
            Bidder bidder = new Bidder(name, password, username);
            userService.addUser(bidder);
            Menu.setCurrentUser(bidder);
