@@ -38,6 +38,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return name + " " + description;
+        return "Item name : " + name + "\nItem description : " + description + "\n";
     }
 }

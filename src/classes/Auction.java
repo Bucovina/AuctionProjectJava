@@ -19,6 +19,10 @@ public class Auction {
         return startPrice;
     }
 
+    public int getId() {
+        return Id;
+    }
+
     public void setStartPrice(int startPrice) {
         this.startPrice = startPrice;
     }
@@ -51,7 +55,7 @@ public class Auction {
         return item;
     }
 
-    public void setItem(Item itemId) {
+    public void setItem(Item item) {
         this.item = item;
     }
 
@@ -85,13 +89,13 @@ public class Auction {
     public String toString() {
         int highestBidPrice = (highestBid != null) ? highestBid.getPrice() : 0;
 
-        return "Item{" +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", item=" +  getItem().getName() + '\'' +
-                ", auctioneer=" + getAuctioneer().getName() + '\'' +
-                ", startPrice=" + startPrice +
-                ", highestBid=" + highestBidPrice +
+        return "Auction {" +
+                "Title='" + title + '\'' +
+                ", Description='" + description + '\'' +
+                ", Item=" +  getItem().getName() + '\'' +
+                ", Auctioneer=" + getAuctioneer().getName() + '\'' +
+                ", Start Price=" + startPrice +
+                ", Highest Bid=" + highestBidPrice +
                 '}';
     }
 }

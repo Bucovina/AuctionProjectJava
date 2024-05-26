@@ -9,8 +9,7 @@ abstract public class User {
     private String password;
     private String username;
     private int role;
-    private List<Item> ownedItems = new ArrayList<Item>();
-
+    private List<Item> ownedItems = new ArrayList<>();
 
 
     public String getPassword() {
@@ -52,10 +51,13 @@ abstract public class User {
         return ownedItems;
     }
 
-    public void setOwnedItems(List<Item> ownedItems) {
-        this.ownedItems = ownedItems;
+    public void addItem(Item item) {
+        this.ownedItems.add(item);
     }
 
+    public void eraseItem(Item item) {
+        this.ownedItems.remove(item);
+    }
     public final int getId() {
         return Id;
     }

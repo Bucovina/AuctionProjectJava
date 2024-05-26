@@ -24,6 +24,20 @@ public class ItemService {
         }
     }
 
+    public void updateItem(Item item, int newOwnerId) {
+        try (Connection connection = DriverManager.getConnection(Database.getURL(), Database.getUSER(), Database.getPASSWORD());
+             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Items SET UserId = ? WHERE Id = ?")) {
+
+            preparedStatement.setInt(1, newOwnerId);
+            preparedStatement.setDouble(2, item.getId());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Item> getUserItems() {
         List<Item> items = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(Database.getURL(), Database.getUSER(), Database.getPASSWORD());

@@ -2,7 +2,7 @@ package menus;
 
 import java.util.Scanner;
 
-public class LoginRegister implements IMenu{
+public class LoginRegister extends Menu{
     private static LoginRegister loginRegister = null;
 
     public static boolean inside = false;
@@ -43,10 +43,11 @@ public class LoginRegister implements IMenu{
             case 1:
                 LoginMenu loginMenu = LoginMenu.getInstance();
                 loginMenu.printMenu();
-                inside = false;
                 LoginMenu.inside = true;
-                if(Menu.getCurrentUser()!=null)
-                    printMainMenu();
+                if(Menu.getCurrentUser()!=null){
+                    Menu.handleSubmenu(MainMenu.getInstance());
+                }
+//                    printMainMenu();
                 else {
                     System.out.println("Wrong data!");
                     loginMenu.printMenu();
@@ -57,10 +58,14 @@ public class LoginRegister implements IMenu{
             case 2:
                 RegisterMenu registerMenu = RegisterMenu.getInstance();
                 registerMenu.printMenu();
-                inside = false;
-                RegisterMenu.inside = true;
+                RegisterMenu.inside = false;
                 printMainMenu();
                 break;
         }
+    }
+
+    @Override
+    public void handleOption(int option) {
+
     }
 }
