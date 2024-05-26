@@ -77,44 +77,50 @@ public class AuctionService {
         long currentTime = System.currentTimeMillis();
         long lastBidtime = System.currentTimeMillis();
         Bidder superBidder = (Bidder) userService.getSuperBidder();
-
+        Scanner sc = new Scanner(System.in);
         while (System.currentTimeMillis() - currentTime <= 14000) {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("\nEnter your bid price: ");
-            int price = sc.nextInt();
-            int highestBidPrice = auction.getHighestBid() != null ? auction.getHighestBid().getPrice() : auction.getStartPrice();
-            if (price < highestBidPrice) {
-                System.out.println("\nYour bid is lower than the current highest bid. Please enter a higher bid.");
-                System.out.println("The current bid price is " + highestBidPrice);
-                continue;
-            }
-
-            Bid bid = new Bid(price, Menu.getCurrentUser().getId());
-            BidService bidService = GenericService.getInstance(BidService.class);
-            bidService.addBid(bid);
-
-            int highestBidId = auction.getHighestBid() != null ? auction.getHighestBid().getId() : -1;
-            if (highestBidId == bid.getId()) {
-                auction.setHighestBid(bid);
-                System.out.println("Congrats your bid is the highest! New bid price is :  " + auction.getHighestBid().getPrice());
-            }
-
-            if (System.currentTimeMillis() - lastBidtime >= 5000) {
+            if (System.currentTimeMillis() - lastBidtime >= 6000) {
                 lastBidtime = System.currentTimeMillis();
                 int highprice = auction.getHighestBid() == null ? auction.getStartPrice() : auction.getHighestBid().getPrice();
                 Bid util_bid = new Bid(highprice + 50, superBidder.getId());
-                if(util_bid.getPrice() > highprice) {
+                if (util_bid.getPrice() > highprice) {
                     auction.setHighestBid(util_bid);
                     bidService.addBid(util_bid);
                     System.out.println("Another bidder set the highest bid. New bid price is : " + auction.getHighestBid().getPrice());
                 }
             }
+
+            if (auction.getHighestBid() == null || (auction.getHighestBid() != null && auction.getHighestBid().getBidderId() != Menu.getCurrentUser().getId())) {
+                System.out.println("\nEnter your bid price: \n");
+                int price = sc.nextInt();
+
+                if (System.currentTimeMillis() - currentTime <= 14000) {
+                    int highestBidPrice = auction.getHighestBid() != null ? auction.getHighestBid().getPrice() : auction.getStartPrice();
+                    if (price < highestBidPrice) {
+                        System.out.println("\nYour bid is lower than the current highest bid. Please enter a higher bid.");
+                        System.out.println("The current bid price is " + highestBidPrice);
+                        continue;
+                    }
+
+                    Bid bid = new Bid(price, Menu.getCurrentUser().getId());
+                    BidService bidService = GenericService.getInstance(BidService.class);
+                    bidService.addBid(bid);
+                    auction.setHighestBid(bid);
+                    System.out.println("Congrats your bid is the highest! New bid price is :  " + auction.getHighestBid().getPrice());
+
+//                    int highestBidId = auction.getHighestBid() != null ? auction.getHighestBid().getId() : -1;
+//                    if (highestBidId == bid.getId()) {
+//                        auction.setHighestBid(bid);
+//                        System.out.println("Congrats your bid is the highest! New bid price is :  " + auction.getHighestBid().getPrice());
+//                    }
+                }
+            }
         }
         System.out.println("Auction timed out!\n");
         deleteAuction(auction.getId());
-        Bidder winningBidder =  (Bidder) userService.getUserById(auction.getHighestBid().getBidderId());
+        Bidder winningBidder = (Bidder) userService.getUserById(auction.getHighestBid().getBidderId());
         System.out.println("The winning bidder is : " + winningBidder.getName() +
-                " with the bid price " + Integer.toString(auction.getHighestBid().getPrice()) + " !!") ;
+                " with the bid price " + Integer.toString(auction.getHighestBid().getPrice()) + " !!");
         addItemToWinner(auction, winningBidder);
     }
 

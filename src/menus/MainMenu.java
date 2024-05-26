@@ -7,9 +7,6 @@ public class MainMenu extends Menu {
 
     public static boolean inside = false;
 
-    String name = Menu.getCurrentUser().getName();
-    int roleid = Menu.getCurrentUser().getRole();
-
     private MainMenu() {
 
     }
@@ -23,10 +20,11 @@ public class MainMenu extends Menu {
 
     public void printMenu() {
         System.out.println("\n----------------- Main Menu -----------------");
-        String role = roleid == 1 ? "Auctioneer" : "Bidder";
-        System.out.println("Hello, " + role + " " + name + "!!");
+        String role = Menu.getCurrentUser().getRole() == 1 ? "Auctioneer" : "Bidder";
+        System.out.println("Hello, " + role + " " + Menu.getCurrentUser().getName() + "!!");
         System.out.println("1. Auctions");
         System.out.println("2. Items");
+        System.out.println("3. Return to Login/Register");
         System.out.println("0. Exit");
     }
 
@@ -40,10 +38,14 @@ public class MainMenu extends Menu {
                 ItemsMenu itemsMenu = ItemsMenu.getInstance();
                 Menu.handleSubmenu(itemsMenu);
                 break;
-            case 0:
+            case 3:
                 LoginRegister loginRegister = LoginRegister.getInstance();
+                Menu.setCurrentUser(null);
                 Menu.handleSubmenu(loginRegister);
                 break;
+            case 0:
+                System.out.println("Goodbye!");
+                System.exit(0);
             default:
                 System.out.println("Invalid option");
         }

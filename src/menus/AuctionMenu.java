@@ -20,7 +20,8 @@ public class AuctionMenu extends Menu{
     private static AuctionMenu menu = null;
     ItemService itemService = GenericService.getInstance(ItemService.class);
     AuctionService auctionService = GenericService.getInstance(AuctionService.class);
-    BidService bidService = GenericService.getInstance(BidService.class);
+    List<Item> myItems= itemService.getUserItems();
+    List<Auction> auctions = auctionService.getAuctions();
 
     private AuctionMenu() {
 
@@ -34,6 +35,8 @@ public class AuctionMenu extends Menu{
     }
 
     public void addAuction(){
+        myItems= itemService.getUserItems();
+        auctions = auctionService.getAuctions();
         System.out.println("----------------- Add Auction Menu -----------------");
         Scanner in = new Scanner(System.in);
         System.out.print("Enter auction title: ");
@@ -43,7 +46,6 @@ public class AuctionMenu extends Menu{
         System.out.print("Enter auction start price: ");
         int startPrice = Integer.parseInt(in.nextLine());
         System.out.print("Your items are : \n");
-        List<Item> myItems= itemService.getUserItems();
         int index=0;
         Map<Integer,Item> itemCoversion = new HashMap<>();
         for(Item item:myItems) {
@@ -63,11 +65,17 @@ public class AuctionMenu extends Menu{
         }
 
     public void printMenu() {
+        myItems= itemService.getUserItems();
+        auctions = auctionService.getAuctions();
         System.out.println("\n----------------- Auctions Menu -----------------");
-        if(Menu.getCurrentUser().getRole() == RolesEnum.Auctioneer.getValue())
+        if(Menu.getCurrentUser().getRole() == RolesEnum.Auctioneer.getValue() && !myItems.isEmpty())
             System.out.println("1. Add auction");
-        else
+        else if (Menu.getCurrentUser().getRole() == RolesEnum.Auctioneer.getValue() && myItems.isEmpty())
+            System.out.println("1. No items to auction");
+        else if (Menu.getCurrentUser().getRole() == RolesEnum.Bidder.getValue() && !auctions.isEmpty())
             System.out.println("1. Participate in auction");
+        else if (Menu.getCurrentUser().getRole() == RolesEnum.Bidder.getValue() && auctions.isEmpty())
+            System.out.println("1. No auction available");
         System.out.println("2. List auctions");
         System.out.println("0. Exit");
     }
@@ -89,7 +97,6 @@ public class AuctionMenu extends Menu{
         System.out.print("\n--------Auction Participation--------------");
         System.out.print("\nThe auctions are : ");
         Scanner in = new Scanner(System.in);
-        List<Auction> auctions = auctionService.getAuctions();
         int index=0;
         Map<Integer,Auction> auctionCoversion = new HashMap<>();
         for(Auction auction:auctions) {
@@ -107,9 +114,9 @@ public class AuctionMenu extends Menu{
     public void handleOption(int option) {
         switch (option) {
             case 1:
-                if(Menu.getCurrentUser().getRole() == RolesEnum.Auctioneer.getValue())
+                if(Menu.getCurrentUser().getRole() == RolesEnum.Auctioneer.getValue() && !myItems.isEmpty())
                     addAuction();
-                else
+                else if(Menu.getCurrentUser().getRole() == RolesEnum.Bidder.getValue() && !auctions.isEmpty())
                     participateInAuction();
                 break;
             case 2:

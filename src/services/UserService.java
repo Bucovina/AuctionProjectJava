@@ -2,6 +2,7 @@ package services;
 
 import classes.*;
 import enums.RolesEnum;
+import menus.Menu;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -112,9 +113,10 @@ public class UserService {
 
     public User getSuperBidder() {
         try (Connection connection = DriverManager.getConnection(Database.getURL(), Database.getUSER(), Database.getPASSWORD());
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE RoleId = ? LIMIT 1")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE RoleId = ? AND Id != ?")) {
 
             preparedStatement.setInt(1, RolesEnum.Bidder.getValue());
+            preparedStatement.setInt(2, Menu.getCurrentUser().getId());
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
