@@ -42,14 +42,14 @@ public class AuctionMenu extends Menu{
         String description = in.nextLine();
         System.out.print("Enter auction start price: ");
         int startPrice = Integer.parseInt(in.nextLine());
-        System.out.print("Your items are : ");
+        System.out.print("Your items are : \n");
         List<Item> myItems= itemService.getUserItems();
         int index=0;
         Map<Integer,Item> itemCoversion = new HashMap<>();
         for(Item item:myItems) {
             index++;
             itemCoversion.put(index,item);
-            System.out.println(index+". "+item.toString()+'\n');
+            System.out.println(index+". "+item.toString());
         }
         System.out.print("Choose the item id you would like to create an auction for : ");
         int itemId = Integer.parseInt(in.nextLine());
@@ -57,6 +57,9 @@ public class AuctionMenu extends Menu{
 
         Auction auction = new Auction(title, description,  realItem, (Auctioneer)Menu.getCurrentUser(), startPrice);
         auctionService.addAuction(auction);
+        System.out.printf("\nAuction added successfully. Press any key to get back to menu ... ");
+        String ch = in.nextLine();
+        printMenu();
         }
 
     public void printMenu() {
@@ -75,17 +78,12 @@ public class AuctionMenu extends Menu{
         for(Auction auction:auctions) {
             System.out.println(auction.toString());
         }
-    }
-
-    public void addBid(){
-        System.out.println("\n----------------- Add Bid Menu -----------------");
+        System.out.println("\nPress any key to get back to main menu ... ");
         Scanner in = new Scanner(System.in);
-        System.out.print("Enter bid price: ");
-        int price = Integer.parseInt(in.nextLine());
-
-        bidService.addBid(new Bid(price, Menu.getCurrentUser().getId()));
-
+        String ch = in.nextLine();
+        printMenu();
     }
+
 
     public void participateInAuction(){
         System.out.print("\n--------Auction Participation--------------");
@@ -99,11 +97,11 @@ public class AuctionMenu extends Menu{
             auctionCoversion.put(index,auction);
             System.out.println("\n" + index+". "+auction.toString());
         }
-        System.out.print("\nChoose the item id you would like to participate in : ");
+        System.out.print("\nChoose the auction id you would like to participate in : ");
         int auctionId = Integer.parseInt(in.nextLine());
         Auction realauction=auctionCoversion.get(auctionId);
-        //addBid();
         auctionService.startTimingAuction(realauction);
+        Menu.handleSubmenu(AuctionMenu.getInstance());
     }
 
     public void handleOption(int option) {
@@ -119,7 +117,7 @@ public class AuctionMenu extends Menu{
                 break;
             case 0:
                 inside = false;
-                MainMenu.inside = true;
+                Menu.handleSubmenu(MainMenu.getInstance());
                 break;
             default:
                 System.out.println("Invalid option");

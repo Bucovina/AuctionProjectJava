@@ -36,6 +36,7 @@ public class LoginMenu implements IMenu{
 
     @Override
     public void printMenu() {
+        LoginRegister.inside = false;
         System.out.println("----------------- Login Menu -----------------");
         Scanner in = new Scanner(System.in);
         System.out.print("Enter username: ");

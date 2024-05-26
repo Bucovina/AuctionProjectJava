@@ -12,7 +12,7 @@ public class BidService {
              PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Bids (price, bidderId) VALUES (?, ?)")) {
 
             preparedStatement.setInt(1, bid.getPrice());
-            preparedStatement.setInt(2, Menu.getCurrentUser().getId());
+            preparedStatement.setInt(2, bid.getBidderId());
 
             preparedStatement.executeUpdate();
 

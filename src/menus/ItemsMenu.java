@@ -53,7 +53,7 @@ public class ItemsMenu extends Menu{
         Scanner in = new Scanner(System.in);
         String ch = in.nextLine();
 
-        while(!ch.equals("X")){
+        while(!ch.toLowerCase().equals("x")){
             ch = in.nextLine();
             System.out.println("Press X to exit... ");
         }
@@ -71,7 +71,7 @@ public class ItemsMenu extends Menu{
                 break;
             case 0:
                 inside = false;
-                MainMenu.inside = true;
+                Menu.handleSubmenu(MainMenu.getInstance());
                 break;
             default:
                 System.out.println("Invalid option");

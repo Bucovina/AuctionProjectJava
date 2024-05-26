@@ -6,7 +6,7 @@ import services.GenericService;
 import services.UserService;
 import java.util.Scanner;
 
-public class RegisterMenu implements IMenu{
+public class RegisterMenu extends Menu{
 
     private static RegisterMenu registerMenu = null;
 
@@ -25,6 +25,8 @@ public class RegisterMenu implements IMenu{
 
     @Override
     public void printMenu() {
+        LoginRegister.inside = false;
+        RegisterMenu.inside = true;
         System.out.println("----------------- Register Menu -----------------");
         Scanner in = new Scanner(System.in);
         System.out.print("Enter full name : ");
@@ -46,11 +48,17 @@ public class RegisterMenu implements IMenu{
            userService.addUser(bidder);
            Menu.setCurrentUser(bidder);
        }
-        inside = false;
+//       LoginRegister.inside = false;
+        RegisterMenu.inside = false;
     }
 
     @Override
     public void handleMenu(int option) {
+
+    }
+
+    @Override
+    public void handleOption(int option) {
 
     }
 }

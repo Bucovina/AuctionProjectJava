@@ -2,6 +2,8 @@ package menus;
 
 import classes.User;
 
+import java.util.Scanner;
+
 public abstract class Menu implements IMenu {
     public static boolean inside = false;
 
@@ -16,13 +18,15 @@ public abstract class Menu implements IMenu {
     }
 
     public void handleMenu(int option) {
-        switch (option) {
-            case 0:
-                inside = false;
-                MainMenu.inside = true;
-                break;
-            default:
-                handleOption(option);
+        handleOption(option);
+    }
+
+    public static void handleSubmenu(Menu menu) {
+        menu.inside = true;
+        menu.printMenu();
+        while (menu.inside) {
+            Scanner scanner = new Scanner(System.in);
+            menu.handleMenu(scanner.nextInt());
         }
     }
 

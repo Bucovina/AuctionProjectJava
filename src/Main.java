@@ -1,4 +1,5 @@
 import menus.LoginRegister;
+import menus.Menu;
 import services.GenericService;
 import services.ItemService;
 import services.UserService;
@@ -11,12 +12,6 @@ public class Main {
         ItemService itemService = GenericService.getInstance(ItemService.class);
 
         LoginRegister loginRegister = LoginRegister.getInstance();
-        Scanner scanner = new Scanner(System.in);
-        LoginRegister.inside = true;
-        while (LoginRegister.inside) {
-            loginRegister.printMenu();
-            int option = scanner.nextInt();
-            loginRegister.handleMenu(option);
-        }
+        Menu.handleSubmenu(loginRegister);
     }
 }
