@@ -16,12 +16,13 @@ public class UserService {
 
     public void addUser(User user) {
         try (Connection connection = DriverManager.getConnection(Database.getURL(), Database.getUSER(), Database.getPASSWORD());
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users (name, username, password, roleId) VALUES (?, ?, ?, ?)")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users (name, username, password, roleId, gender) VALUES (?, ?, ?, ?, ?)")) {
 
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getUsername());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setInt(4, user.getRole());
+            preparedStatement.setInt(5,user.getGender());
 
             preparedStatement.executeUpdate();
 
@@ -29,8 +30,6 @@ public class UserService {
             e.printStackTrace();
         }
     }
-
-
 
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
@@ -44,11 +43,12 @@ public class UserService {
                 String username = resultSet.getString("Username");
                 String password = resultSet.getString("Password");
                 int role = resultSet.getInt("RoleId");
+                int gender = resultSet.getInt("Gender");
                 User user;
                 if (role == RolesEnum.Auctioneer.getValue())
-                    user = new Auctioneer(name, username, password);
+                    user = new Auctioneer(name, username, password, gender);
                 else
-                    user = new Bidder(name, username, password);
+                    user = new Bidder(name, username, password,gender);
                 users.add(user);
             }
 
@@ -71,10 +71,11 @@ public class UserService {
                 int id=resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
                 int role = resultSet.getInt("RoleId");
+                int gender = resultSet.getInt("Gender");
                 if(role==RolesEnum.Auctioneer.getValue())
-                    return new Auctioneer(id,name, username, password);
+                    return new Auctioneer(id,name, username, password, gender);
                 else
-                    return new Bidder(id,name, username, password);
+                    return new Bidder(id,name, username, password, gender);
             }
 
         } catch (SQLException e) {
@@ -96,10 +97,11 @@ public class UserService {
                 String username = resultSet.getString("Username");
                 String password = resultSet.getString("Password");
                 int role = resultSet.getInt("RoleId");
+                int gender = resultSet.getInt("Gender");
                 if(role==RolesEnum.Auctioneer.getValue())
-                    return new Auctioneer(id,name, username, password);
+                    return new Auctioneer(id,name, username, password, gender);
                 else
-                    return new Bidder(id,name, username, password);
+                    return new Bidder(id,name, username, password,gender);
             }
 
         } catch (SQLException e) {
@@ -124,7 +126,8 @@ public class UserService {
                 String username = resultSet.getString("Username");
                 String password = resultSet.getString("Password");
                 int id = resultSet.getInt("Id");
-                return new Bidder(id,name, username, password);
+                int gender = resultSet.getInt("Gender");
+                return new Bidder(id,name, username, password, gender);
             }
 
         } catch (SQLException e) {

@@ -4,9 +4,10 @@ import classes.Auctioneer;
 import classes.Bidder;
 import services.GenericService;
 import services.UserService;
+
 import java.util.Scanner;
 
-public class RegisterMenu extends Menu{
+public class RegisterMenu extends Menu {
 
     private static RegisterMenu registerMenu = null;
 
@@ -14,10 +15,11 @@ public class RegisterMenu extends Menu{
 
     UserService userService = GenericService.getInstance(UserService.class);
 
-    private RegisterMenu() {}
+    private RegisterMenu() {
+    }
 
     public static synchronized RegisterMenu getInstance() {
-        if(registerMenu == null) {
+        if (registerMenu == null) {
             registerMenu = new RegisterMenu();
         }
         return registerMenu;
@@ -37,17 +39,18 @@ public class RegisterMenu extends Menu{
         String password = in.nextLine();
         System.out.print("Choose role : 1. Auctioneer or 2. Bidder");
         int role = Integer.parseInt(in.nextLine());
-
-       if(role == 1) {
-            Auctioneer auctioneer = new Auctioneer(name, password, username);
+        System.out.print("Choose role : 1. Male or 2. Female");
+        int gender = Integer.parseInt(in.nextLine());
+        if (role == 1) {
+            Auctioneer auctioneer = new Auctioneer(name, password, username,gender);
             userService.addUser(auctioneer);
-            Menu.setCurrentUser(auctioneer);
-       }
-       else if(role == 2) {
-           Bidder bidder = new Bidder(name, password, username);
-           userService.addUser(bidder);
-           Menu.setCurrentUser(bidder);
-       }
+            Menu.setCurrentUser(userService.Auth(name, password));
+
+        } else if (role == 2) {
+            Bidder bidder = new Bidder(name, password, username, gender);
+            userService.addUser(bidder);
+            Menu.setCurrentUser(userService.Auth(name, password));
+        }
 //       LoginRegister.inside = false;
         RegisterMenu.inside = false;
     }

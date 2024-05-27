@@ -1,12 +1,11 @@
 package menus;
 
+import Exceptions.InvalidPrice;
 import classes.Auction;
 import classes.Auctioneer;
-import classes.Bid;
 import classes.Item;
 import enums.RolesEnum;
 import services.AuctionService;
-import services.BidService;
 import services.GenericService;
 import services.ItemService;
 import java.util.HashMap;
@@ -14,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import static Exceptions.InvalidPrice.validateIntPrice;
 
 public class AuctionMenu extends Menu{
 
@@ -44,7 +45,13 @@ public class AuctionMenu extends Menu{
         System.out.print("Enter auction description: ");
         String description = in.nextLine();
         System.out.print("Enter auction start price: ");
-        int startPrice = Integer.parseInt(in.nextLine());
+        String startPriceString = in.nextLine();
+        try {
+            validateIntPrice(startPriceString);
+        } catch (InvalidPrice e) {
+            System.out.println(e.getMessage());
+        }
+        int startPrice = Integer.parseInt(startPriceString);
         System.out.print("Your items are : \n");
         int index=0;
         Map<Integer,Item> itemCoversion = new HashMap<>();
@@ -59,7 +66,7 @@ public class AuctionMenu extends Menu{
 
         Auction auction = new Auction(title, description,  realItem, (Auctioneer)Menu.getCurrentUser(), startPrice);
         auctionService.addAuction(auction);
-        System.out.printf("\nAuction added successfully. Press any key to get back to menu ... ");
+        System.out.printf("\nAuction added successfully. Press enter to get back to menu ... ");
         String ch = in.nextLine();
         printMenu();
         }
@@ -86,7 +93,7 @@ public class AuctionMenu extends Menu{
         for(Auction auction:auctions) {
             System.out.println(auction.toString());
         }
-        System.out.println("\nPress any key to get back to main menu ... ");
+        System.out.println("\nPress enter to get back to main menu ... ");
         Scanner in = new Scanner(System.in);
         String ch = in.nextLine();
         printMenu();

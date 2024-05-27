@@ -5,12 +5,12 @@ import enums.RolesEnum;
 
 public class Bidder extends User {
 
-    public Bidder(String name, String password, String username) {
-        super(name, password, username, RolesEnum.Bidder.getValue());
+    public Bidder(String name, String password, String username,int gender) {
+        super(name, password, username, RolesEnum.Bidder.getValue(), gender);
     }
 
-    public Bidder(int Id, String name, String password, String username) {
-        super(Id, name, password, username, RolesEnum.Bidder.getValue());
+    public Bidder(int Id, String name, String password, String username, int gender) {
+        super(Id, name, password, username, RolesEnum.Bidder.getValue(), gender);
     }
 
     public void createNewBid(Auction auction, int price) {

@@ -9,8 +9,16 @@ abstract public class User {
     private String password;
     private String username;
     private int role;
+    private int gender;
     private List<Item> ownedItems = new ArrayList<>();
 
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
 
     public String getPassword() {
         return password;
@@ -28,19 +36,21 @@ abstract public class User {
         this.username = username;
     }
 
-    public User(String name, String password, String username, int role) {
+    public User(String name, String password, String username, int role, int gender) {
         this.name = name;
         this.password = password;
         this.username = username;
         this.role = role;
+        this.gender = gender;
     }
 
-    public User(int Id, String name, String password, String username, int role) {
+    public User(int Id, String name, String password, String username, int role, int gender) {
         this.Id = Id;
         this.name = name;
         this.password = password;
         this.username = username;
         this.role = role;
+        this.gender = gender;
     }
 
     public int getRole() {
